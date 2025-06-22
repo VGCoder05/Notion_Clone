@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.icon{
+    @apply w-[2.2rem] h-[2.2rem];
+}
