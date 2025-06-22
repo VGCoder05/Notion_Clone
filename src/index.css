@@ -3,3 +3,7 @@
 .icon{
     @apply w-[2.2rem] h-[2.2rem];
 }
+
+.page{
+    @apply p-2;
+}
