@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { update } from "../store/reducer/dataSlice";
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import { selectAllPages } from "../store/selectors";
 
 const Sidebar = ({ user, page_name = "Page" }) => {
   // const data = useSelector((state) => console.log(state.data.pages));
-  const data = useSelector((state) => state.dataSlice.data);
+  const pages = useSelector(selectAllPages);
+  
+console.log(pages)
+
   const dispatch = useDispatch();
 
   // Temp
@@ -29,8 +33,12 @@ const Sidebar = ({ user, page_name = "Page" }) => {
             dispatch(
               update({
                 id: nanoid(),
-                page_name: `page ${count<10? `0${count}`: `${count}`}`,
-                page_data: [{}],
+                title: `page ${count < 10 ? `0${count}` : `${count}`}`,
+                icon: "📄",
+                coverImage: null,
+                blocks: [],
+                parentId: null,
+                childPageIds: [],
               })
             );
 
@@ -55,14 +63,14 @@ const Sidebar = ({ user, page_name = "Page" }) => {
       {/* Private Pages Section */}
       <div className="Private">
         <p>Private</p>
-        {data.pages.map((page) => (
+        {pages.map((page) => (
           <Link key={page.id} to={`/page/${page.id}`} className="flex gap-1.5">
             <img className="icon" src="icons/book-closed_gray.svg" alt="" />
-            <p>{page.page_name}</p>
+            <p>{page.title}</p>
           </Link>
         ))}
       </div>
-      <button onClick={() => console.log(data)}>Click</button>
+      <button onClick={() => console.log(pages)}>Click</button>
     </div>
   );
 };

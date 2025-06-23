@@ -1,16 +1,12 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import intial_state from "./intial_state";
 
-let initialState = {
-  data: {
-    id: nanoid(),
-    user: "Vanshit",
-    pages: [{
-      id: nanoid(),
-      page_name: "page 01",
-      page_data: [{}]
-    }]
-  }
-};
+let initialState = intial_state;
+  
+
+// If using nanoid for page & active page IDs initially:
+// initialState.workspace.pages[0].id = nanoid();
+initialState.workspace.activePageId = initialState.workspace.pages[0].id;
 
 export const dataSlice = createSlice({
   name: "data",
@@ -18,12 +14,15 @@ export const dataSlice = createSlice({
   reducers: {
     update: (state, action) => {
       // wrong -> return {...state, pages: pages.push(actions.payload)};
-      state.data.pages.push(action.payload);
+
+      // Updation slice method code with check before accessing pages
+      if (state?.workspace?.pages) {
+        state.workspace.pages.push(action.payload);
+      }
     },
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { update } = dataSlice.actions;
 
 export default dataSlice.reducer;
