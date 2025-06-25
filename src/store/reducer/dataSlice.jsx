@@ -2,7 +2,6 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 import intial_state from "./intial_state";
 
 let initialState = intial_state;
-  
 
 // If using nanoid for page & active page IDs initially:
 // initialState.workspace.pages[0].id = nanoid();
@@ -21,11 +20,19 @@ export const dataSlice = createSlice({
       }
     },
     setActiveID: (state, pageID) => {
-      state.workspace.activePageId = pageID;
-    }
+      state.workspace.activePageId = pageID.payload;
+    },
+    updateBlock: (state, blockData) => {
+      let activePgID = state.workspace.activePageId;
+      const currPg = state.workspace.pages.filter((page) => {
+        if (page.id == activePgID){
+          page.blocks = [blockData.payload];
+        };
+      });
+    },
   },
 });
 
-export const { update, setActiveID } = dataSlice.actions;
+export const { update, setActiveID, updateBlock } = dataSlice.actions;
 
 export default dataSlice.reducer;

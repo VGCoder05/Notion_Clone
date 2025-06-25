@@ -6,7 +6,7 @@ import { useState } from "react";
 import { selectAllPages } from "../store/selectors";
 
 const Sidebar = ({ user, page_name = "Page" }) => {
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => state.data.workspace);
   const pages = useSelector(selectAllPages);
   
 // console.log(pages)
@@ -68,7 +68,7 @@ const Sidebar = ({ user, page_name = "Page" }) => {
             key={page.id}
             to={`/page/${page.id}`}
             className="flex gap-1.5"
-            onClick={dispatch(setActiveID(page.id))}
+            onClick={() => dispatch(setActiveID(page.id))}
           >
             <img className="icon" src="icons/book-closed_gray.svg" alt="" />
             <p>{page.title}</p>
