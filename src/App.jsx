@@ -3,7 +3,7 @@ import MainRoutes from './route/MainRoutes'
 
 const App = () => {
   return (
-    <div className="min-h-screen flex text-white bg-gray-800">
+    <div className="min-h-screen flex  bg-yellow-100">
       <Sidebar user="Vanshit" />
       <MainRoutes />
     </div>

@@ -1,17 +1,12 @@
 // For active page ID
 export const selectActivePageId = (state) => state.data.workspace.activePageId;
-  // console.log(state);
-
-// selectActivePageId()
-
-// export const etc = (state) =>  console.log(state.data.workspace.activePageId);
 
 // For usesrs all pages
 export const selectAllPages = (state) => state.data.workspace.pages;
 
 // find page by the ID of page
 export const selectPageById = (state, pageId) =>
-    state.workspace.pages.find((page) => page.id === pageId);
+    state.data.workspace.pages.find((page) => page.id === pageId);
 
 // all blocks of active page
 export const selectBlocksForPage = (state, pageId) => {

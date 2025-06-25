@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { update } from "../store/reducer/dataSlice";
+import { update, setActiveID } from "../store/reducer/dataSlice";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { selectAllPages } from "../store/selectors";
 
 const Sidebar = ({ user, page_name = "Page" }) => {
-  // const data = useSelector((state) => console.log(state.data.pages));
+  const data = useSelector((state) => state.data);
   const pages = useSelector(selectAllPages);
   
-console.log(pages)
+// console.log(pages)
 
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ console.log(pages)
         <img className="icon" src="icons/home.svg" alt="" />
         <p>Home</p>
       </Link>
-      <Link to="/indox" className="flex gap-1.5">
+      <Link to="/inbox" className="flex gap-1.5">
         <img className="icon" src="icons/inbox.svg" alt="" />
         <p>Inbox</p>
       </Link>
@@ -64,13 +64,18 @@ console.log(pages)
       <div className="Private">
         <p>Private</p>
         {pages.map((page) => (
-          <Link key={page.id} to={`/page/${page.id}`} className="flex gap-1.5">
+          <Link
+            key={page.id}
+            to={`/page/${page.id}`}
+            className="flex gap-1.5"
+            onClick={dispatch(setActiveID(page.id))}
+          >
             <img className="icon" src="icons/book-closed_gray.svg" alt="" />
             <p>{page.title}</p>
           </Link>
         ))}
       </div>
-      <button onClick={() => console.log(pages)}>Click</button>
+      <button onClick={() => console.log(data)}>Click</button>
     </div>
   );
 };

@@ -20,9 +20,12 @@ export const dataSlice = createSlice({
         state.workspace.pages.push(action.payload);
       }
     },
+    setActiveID: (state, pageID) => {
+      state.workspace.activePageId = pageID;
+    }
   },
 });
 
-export const { update } = dataSlice.actions;
+export const { update, setActiveID } = dataSlice.actions;
 
 export default dataSlice.reducer;

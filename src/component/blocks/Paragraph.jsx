@@ -4,51 +4,58 @@ import { useDispatch } from "react-redux";
 // import { updateBlockContent } from '../yourSlice'; //  Example
 
 const ParagraphBlock = ({ block, pageId }) => {
+  // Function to automatically resize the textarea based on content
+  function autoResizeTextarea(textarea) {
+    textarea.style.height = "auto"; // Reset the height to auto
+    textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on scrollHeight
+  }
+
   const dispatch = useDispatch();
-  // Local state for editing to avoid dispatching on every keystroke
+
   const [text, setText] = useState(block.content);
 
-  // Update local state if block content changes from Redux (e.g., collaborative editing)
+  // Update local state if block content changes from Redux
   useEffect(() => {
     setText(block.content);
   }, [block.content]);
 
   const handleChange = (e) => {
     setText(e.target.value);
+    autoResizeTextarea(event.target); // Resize the textarea according to text enter in textarea.
   };
 
-  const handleBlur = () => {
-    // Dispatch update only when user finishes editing (on blur)
-    // Or use a debounce mechanism for more frequent updates
+  const handleBlur = (event) => {
+    // Dispatch update only when user finishes editing (on blur) or use a debounce mechanism for more frequent updates
     if (text !== block.content) {
       // dispatch(updateBlockContent({ pageId, blockId: block.id, newContent: text }));
-      console.log("Dispatch update for block:", block.id, "new content:", text); // Placeholder
+      // console.log("Dispatch update for block:", block.id, "new content:", text);
     }
+
   };
 
-  // For simplicity, using a textarea. For rich text, you'd use contentEditable
-  // or a library like Slate.js, Draft.js, TipTap.
   return (
     <div className="block paragraph-block" style={block.properties}>
-      {" "}
-      {/* Apply styles from properties */}
       <textarea
         value={text}
         onChange={handleChange}
         onBlur={handleBlur}
-        placeholder="Type '/' for commands..." // Notion-like placeholder
-        rows={1} // Auto-grow textarea is a common feature
+        placeholder="Type '/' for commands..."
+        rows={1}
         style={{
+          padding: "2px 0",
           width: "100%",
           border: "none",
           outline: "none",
           resize: "none",
-          padding: "2px 0",
           fontSize: "inherit",
+          backgroundColor: "transparent",
         }}
       />
     </div>
   );
 };
 
+
 export default ParagraphBlock;
+
+
