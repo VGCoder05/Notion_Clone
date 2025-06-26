@@ -25,12 +25,9 @@ const print = ()=> console.log(blocks)
       {/* Add Page Icon/Cover if they exist */}
 
       <div id="editorjs" className="blocks-list w-[100%] ">
-        {/* {blocks.map((block) => (
-          <BlockRenderer key={block.id} block={block} pageId={pageId} />
-        ))} */}
         <Text_Editor />
       </div>
-      <button onClick={print}>Click Here</button>
+      {/* <button onClick={print}>Click Here</button> */}
     </div>
   );
 

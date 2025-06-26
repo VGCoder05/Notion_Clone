@@ -9,10 +9,16 @@ import ImageTool from '@editorjs/image';
 import LinkTool from '@editorjs/link';
 import CodeTool from '@editorjs/code';
 import AttachesTool from '@editorjs/attaches';
+import Paragraph from '@editorjs/paragraph';
+
 
 const tools = {
   header: {
     class: Header,
+    inlineToolbar: true,
+  },  
+  paragraph: {
+    class: Paragraph,
     inlineToolbar: true,
   },
   quote: {

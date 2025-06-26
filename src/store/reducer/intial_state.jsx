@@ -18,9 +18,7 @@ export default {
         icon: "📄",
         coverImage: null, // URL to a cover image
         // 'blocks' represent paragraph, heading, images etc.
-        blocks: [
-          {}
-        ],
+        blocks: [{ type: "paragraph", data: { text: "" } }],
         // For page nesting
         parentId: null, // ID of the parent page, or null if top-level
         childPageIds: [], // Array of IDs of sub-pages

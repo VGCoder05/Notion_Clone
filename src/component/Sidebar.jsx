@@ -5,8 +5,8 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { selectAllPages } from "../store/selectors";
 
-const Sidebar = ({ user, page_name = "Page" }) => {
-  const data = useSelector((state) => state.data.workspace);
+const Sidebar = ({ user = "Vanshit", page_name = "Page" }) => {
+  // const data = useSelector((state) => state.data.workspace);
   const pages = useSelector(selectAllPages);
   
 // console.log(pages)
@@ -75,7 +75,7 @@ const Sidebar = ({ user, page_name = "Page" }) => {
           </Link>
         ))}
       </div>
-      <button onClick={() => console.log(data)}>Click</button>
+      {/* <button onClick={() => console.log(data)}>Click</button> */}
     </div>
   );
 };
