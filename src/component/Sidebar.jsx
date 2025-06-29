@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { update, setActiveID } from "../store/reducer/dataSlice";
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import { selectAllPages } from "../store/selectors";
+import { selectAllPages, selectUser } from "../store/selectors";
 
-const Sidebar = ({ user = "Vanshit", page_name = "Page" }) => {
+const Sidebar = () => {
   // const data = useSelector((state) => state.data.workspace);
   const pages = useSelector(selectAllPages);
+  const user = useSelector(selectUser);
   
 // console.log(pages)
 
@@ -21,9 +22,9 @@ const Sidebar = ({ user = "Vanshit", page_name = "Page" }) => {
       <div className="user w-[100%] flex justify-between items-center">
         <p className="text-xl font-bold">
           <span className="mr-2 px-2 py-1 text-[16px] bg-gray-400 rounded-[0.2rem]">
-            {user[0]}
+            {user.name[0]}
           </span>
-          {user}
+          {user.name}
         </p>
         <img
           className="icon"

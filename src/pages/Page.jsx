@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBlocksForActivePage, selectPageById, selectActivePageId } from '../store/selectors'; // Adjust path
-import BlockRenderer from '../component/BlockRenderer'; // We'll create this next
 import Text_Editor from "../component/Text_Editor";
 
 const PageDetail = () => {
@@ -12,7 +11,7 @@ const PageDetail = () => {
   );
   const blocks = useSelector(selectBlocksForActivePage);
 
-const print = ()=> console.log(blocks)
+// const print = ()=> console.log(blocks)
 
   if (!currentPage) {
     return <div>Page not found</div>;

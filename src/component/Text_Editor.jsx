@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectBlocksForActivePage,
   selectActivePageId,
+  selectCompData,
 } from "../store/selectors";
 import { updateBlock } from "../store/reducer/dataSlice";
 
@@ -15,6 +16,7 @@ const Text_Editor = () => {
 
   const blocksOfActivePg = useSelector(selectBlocksForActivePage);
   const activePageId = useSelector(selectActivePageId);
+  const compData = useSelector(selectCompData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -73,14 +75,22 @@ const Text_Editor = () => {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("Data", JSON.stringify(compData));
+  }, [compData]);
+
   return (
     <div>
       <div ref={editorRef}></div>
-
       <button onClick={handleSave}>Save</button>
-      {/* <button onClick={test}>test</button> */}
+      {/* <button onClick={test}>test</button> */};
     </div>
   );
 };
 
 export default Text_Editor;
+
+// const [bills, setBills] = useState(() => {
+//   const saved = localStorage.getItem("invoiceData");
+//   return saved ? JSON.parse(saved) : [];
+// });

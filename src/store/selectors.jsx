@@ -21,3 +21,9 @@ export const selectBlocksForActivePage = (state) => {
   const page = selectPageById(state, activeId);
   return page ? page.blocks : [];
 };
+
+export const selectCompData = (state)=> state.data;
+
+// User Data
+export const selectUser = (state) => state.data.user;
+
