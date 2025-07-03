@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "./style/tools/PgLink.css";
+
+:root{
+  --heading: 3px;
+  --w: 20px;
+}
 
 .icon {
   @apply w-[2.2rem] h-[2.2rem];
@@ -22,25 +28,89 @@
   width: 92%;
   max-width: none !important;
 }
+
+/* for toolbar */
 .ce-toolbar__content {
-  color: white !important;
   max-width: 92% !important;
 }
 
 .ce-toolbar__plus {
-    background-image: url('/public/icons/plus.svg') !important;
-    background-size: 18px;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: transparent !important; /* Hide original icon */
-  }
+  background-image: url("/public/icons/plus.svg") !important;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent !important; /* Hide original icon */
+}
 
- 
-  .ce-toolbar__settings-btn {
-    background-image: url('/public/icons/drag.svg');
-    background-size: 14px;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: transparent; /* Hide original icon */
-  } 
-  
+.ce-toolbar__settings-btn {
+  background-image: url("/public/icons/drag.svg");
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent; /* Hide original icon */
+}
+
+
+/* for divider Block */
+.custom-hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 16px 0;
+}
+
+
+/* for Code Block */
+.editorjs-codeFlask_Wrapper .editorjs-codeFlask_LangDisplay {
+  display: flex;
+  align-items: center;
+}
+
+.codeflask--has-line-numbers .codeflask__flatten {
+    width: calc(100% - var(--w)) !important;
+    left: var(--w) !important;
+}
+
+.codeflask__lines {
+  width: var(--w) !important;
+}
+.codeflask.codeflask--has-line-numbers:before {
+  width: var(--w) !important;
+}
+
+/* Pop up container */
+.ce-popover__items{
+  display: flex;
+  flex-direction: column;
+}
+
+/* For quote block */
+.cdx-quote__text {
+  min-height: auto !important;
+}
+
+.cdx-input {
+  border: none;
+  border-left: 2px solid rgba(201, 201, 204, .48) !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Heading */
+
+h1 {
+  font-size: calc(var(--heading) * 6) !important; 
+}
+
+h2 {
+  font-size: calc(var(--heading) * 5) !important; 
+}
+
+h3 {
+  font-size: calc(var(--heading) * 4) !important; 
+}
+
+h1, h2, h3 {
+  font-weight: 600 !important;
+  margin: 0.5em 0 !important;
+  line-height: 1.3 !important;
+}

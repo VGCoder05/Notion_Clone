@@ -28,7 +28,7 @@ const Sidebar = () => {
         </p>
         <img
           className="icon"
-          src="icons/new_note.svg"
+          src="/icons/new_note.svg"
           alt=""
           onClick={() => {
             dispatch(
@@ -49,15 +49,15 @@ const Sidebar = () => {
         />
       </div>
       <Link to="/search" className="flex gap-1.5">
-        <img className="icon" src="icons/search.svg" alt="" />
+        <img className="icon" src="/icons/search.svg" alt="" />
         <p>Search</p>
       </Link>
       <Link to="/" className="flex gap-1.5">
-        <img className="icon" src="icons/home.svg" alt="" />
+        <img className="icon" src="/icons/home.svg" alt="" />
         <p>Home</p>
       </Link>
       <Link to="/inbox" className="flex gap-1.5">
-        <img className="icon" src="icons/inbox.svg" alt="" />
+        <img className="icon" src="/icons/inbox.svg" alt="" />
         <p>Inbox</p>
       </Link>
 
@@ -71,7 +71,7 @@ const Sidebar = () => {
             className="flex gap-1.5"
             onClick={() => dispatch(setActiveID(page.id))}
           >
-            <img className="icon" src="icons/book-closed_gray.svg" alt="" />
+            <img className="icon" src="/icons/book-closed_gray.svg" alt="" />
             <p>{page.title}</p>
           </Link>
         ))}

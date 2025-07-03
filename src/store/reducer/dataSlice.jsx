@@ -2,7 +2,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 import intial_state from "./intial_state";
 
 
-console.log(intial_state)
+// console.log(intial_state)
 let initialState = intial_state;
 
 // If using nanoid for page & active page IDs initially:

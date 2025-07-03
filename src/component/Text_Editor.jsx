@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
-import tools from "./Tools";
+import tools from "./tools/Tools";
+import renderBlock from "./blocks/blocks_render";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectBlocksForActivePage,
   selectActivePageId,
   selectCompData,
+  selectBlocksForPage,
 } from "../store/selectors";
 import { updateBlock } from "../store/reducer/dataSlice";
 
@@ -17,7 +19,9 @@ const Text_Editor = () => {
   const blocksOfActivePg = useSelector(selectBlocksForActivePage);
   const activePageId = useSelector(selectActivePageId);
   const compData = useSelector(selectCompData);
+  // const blocks = useSelector(selectBlocksForPage);
   const dispatch = useDispatch();
+  console.log(blocksOfActivePg);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -31,7 +35,6 @@ const Text_Editor = () => {
       ejInstance.current.destroy();
       ejInstance.current = null;
     }
-    console.log(blocksOfActivePg);
     const existingBlocks = Array.isArray(blocksOfActivePg)
       ? [...blocksOfActivePg]
       : [];
@@ -54,11 +57,46 @@ const Text_Editor = () => {
       data: { blocks: blocksWithEmptyParagraph },
     });
 
+    // // helper function for image
+    // function toBase64(file) {
+    //   return new Promise((resolve, reject) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => resolve(reader.result);
+    //     reader.onerror = reject;
+    //     reader.readAsDataURL(file);
+    //   });
+    // }
+
     return () => {
       ejInstance.current?.destroy();
       ejInstance.current = null;
     };
   }, [activePageId]);
+
+  useEffect(() => {
+    const handleSlashCommand = (e) => {
+      if (e.key === "\\") {
+        const inputListener = (e2) => {
+          if (e2.key === "Enter") {
+            const value = e.target.value;
+            if (value.trim() === "\\link" && ejInstance.current) {
+              ejInstance.current.blocks.insert("linkTool");
+              e2.preventDefault();
+            }
+            e.target.removeEventListener("keydown", inputListener);
+          }
+        };
+
+        document.activeElement.addEventListener("keydown", inputListener);
+      }
+    };
+
+    document.addEventListener("keydown", handleSlashCommand);
+
+    return () => {
+      document.removeEventListener("keydown", handleSlashCommand);
+    };
+  }, []);
 
   const handleSave = async () => {
     try {
@@ -82,6 +120,9 @@ const Text_Editor = () => {
   return (
     <div>
       <div ref={editorRef}></div>
+      {blocksOfActivePg.map((block, index) => (
+        <div key={index}>{renderBlock(block)}</div>
+      ))}
       <button onClick={handleSave}>Save</button>
       {/* <button onClick={test}>test</button> */};
     </div>
