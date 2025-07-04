@@ -8,7 +8,7 @@ import store from "./store/store.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <BrowserRouter  basename="/notion">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
